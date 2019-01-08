@@ -1,0 +1,49 @@
+{
+  "name": "react-composition-provider",
+  "version": "1.0.0",
+  "homepage": "http://orir.github.io/react-composition-provider",
+  "description": "",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "composition",
+    "provider",
+    "context",
+    "consumer",
+    "pattern"
+  ],
+  "main": "examples/compose/index.js",
+  "browser": "examples/refs/index.js",
+  "dependencies": {
+    "react": "next",
+    "react-dom": "next",
+    "react-overlays": "1.0.0",
+    "react-scripts": "2.1.2",
+    "uncontrollable": "6.0.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.2.0",
+    "react-dom": ">=16.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.2.3",
+    "@babel/core": "7.2.2",
+    "gh-pages": "2.0.1",
+    "react": "next",
+    "react-dom": "next",
+    "react-overlays": "1.0.0",
+    "react-scripts": "2.0.3",
+    "uncontrollable": "6.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "compile": "NODE_ENV=production babel -d es/ src/ --presets react-app",
+    "prepublish": "npm run compile"
+  },
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+}
