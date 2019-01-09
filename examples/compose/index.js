@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Overlay } from "react-overlays";
 
-import withCompositionProvider, { composers } from "../../src";
+import { withCompositionProvider, composers } from "../../src";
 
 import "../styles.css";
 

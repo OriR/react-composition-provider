@@ -15,6 +15,7 @@ module.exports = {
   ],
   plugins: [
     '@babel/transform-react-jsx',
+    '@babel/transform-runtime',
     // don't use `loose` mode here - need to copy symbols when spreading
     '@babel/proposal-object-rest-spread',
     NODE_ENV === 'test' && '@babel/transform-modules-commonjs',

@@ -1,5 +1,3 @@
-import React from "react";
-
 const withReverser = composer => {
   composer.reverse = ({ propChain, ...rest }) =>
     composer({ ...rest, propChain: propChain.slice().reverse() });
@@ -7,11 +5,24 @@ const withReverser = composer => {
 };
 
 const withTaker = (composer, result = composer) => {
+  const createWhen = (whencb) => (cb) => ({ propChain, chainWithProp }) => {
+    const index = chainWithProp.reduce(whencb(cb), -1);
+    if (index === -1) {
+      throw new Error ('Could not find a link in the chain that satisfies the given when condition.')
+    }
+
+    return propChain[index];
+  };
+
   result.take = {
     first: () => ({ propChain }) => propChain.pop(),
     last: () => ({ propChain }) => propChain.shift(),
     index: index => ({ propChain }) => propChain[index]
   };
+
+  result.take.first.when = createWhen((cb) => (result, props, index) => result > -1 ? result : cb({ props }) ? index : -1);
+  result.take.last.when = createWhen((cb) => (result, props, index) => cb({ props }) ? index : result);
+
   return result;
 };
 

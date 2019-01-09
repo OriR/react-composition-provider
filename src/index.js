@@ -1,5 +1,5 @@
 export {
-  default,
+  withCompositionProvider,
   innerRefProp as refProp,
   defaultCompose
 } from "./withCompositionProvider";

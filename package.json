@@ -2,7 +2,14 @@
   "name": "react-composition-provider",
   "version": "0.0.1",
   "homepage": "http://orir.github.io/react-composition-provider",
-  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OriR/react-composition-provider.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OriR/react-composition-provider/issues"
+  },
+  "description": "A High Order Component library for components to follow the Composition Provider pattern",
   "license": "MIT",
   "keywords": [
     "react",
@@ -14,8 +21,8 @@
     "props",
     "drilling"
   ],
-  "main": "examples/compose/index.js",
-  "browser": "examples/refs/index.js",
+  "main": "dist/index.js",
+  "module": "es/index.js",
   "dependencies": {
     "react": "next",
     "react-dom": "next",
@@ -28,39 +35,47 @@
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.2.3",
-    "@babel/core": "7.2.2",
-    "@babel/plugin-proposal-object-rest-spread": "7.2.0",
-    "@babel/plugin-transform-react-display-name": "7.2.0",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/plugin-transform-react-display-name": "^7.2.0",
     "@babel/plugin-transform-react-jsx": "7.2.0",
-    "@babel/preset-env": "7.2.0",
-    "eslint-config-prettier": "3.3.0",
-    "eslint-plugin-prettier": "3.0.1",
-    "eslint-plugin-react": "7.12.3",
-    "lint-staged": "8.1.0",
-    "prettier": "latest",
-    "rollup": "1.1.0",
-    "rollup-plugin-babel": "latest",
-    "rollup-plugin-node-resolve": "4.0.0",
-    "rollup-plugin-replace": "2.1.0",
-    "rollup-plugin-terser": "4.0.2",
-    "gh-pages": "2.0.1",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "cross-env": "^5.2.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.3",
+    "gh-pages": "^2.0.1",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
     "react": "next",
     "react-dom": "next",
-    "react-overlays": "1.0.0",
-    "react-scripts": "2.0.3",
-    "uncontrollable": "6.0.0"
+    "react-overlays": "^1.0.0",
+    "react-scripts": "^2.0.3",
+    "rollup": "^1.1.0",
+    "rollup-plugin-babel": "^4.2.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-replace": "^2.1.0",
+    "rollup-plugin-terser": "^4.0.2",
+    "uncontrollable": "^6.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rollup -c",
     "test": "echo hello",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "compile": "NODE_ENV=production babel -d es/ src/ --presets react-app",
-    "prepublish": "npm run compile",
-    "build:es": "rollup -c"
+    "prepublish": "npm run buid:production",
+    "build:site": "cross-env NODE_ENV=production rollup -c",
+    "build:production": "cross-env NODE_ENV=production rollup -c"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

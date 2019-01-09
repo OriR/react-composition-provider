@@ -1,5 +1,6 @@
 import React from "react";
 import composers from "./composers";
+
 export const innerRefProp = `$$__WithCompositionProvider__inner-ref-prop__$$`;
 
 export const defaultCompose = {
@@ -102,7 +103,7 @@ const forward = Component =>
     : Component;
 const memo = Component => (React.memo ? React.memo(Component) : Component);
 
-export default (
+export const withCompositionProvider = (
   Component,
   {
     polyfills: { createContext = React.createContext, ...polyfills } = {},
@@ -123,8 +124,8 @@ export default (
 
   WithCompositionProvider.Provider = forward(memo(Provider));
 
-  WithCompositionProvider.Provider.Scoped = ({ children, ...props }) =>
-    innerProvider(Context, normalizeProps(props), children);
+  WithCompositionProvider.Provider.Scoped = forward(memo(({ children, ...props }) =>
+    innerProvider(Context, normalizeProps(props), children)));
 
   return WithCompositionProvider;
 };
