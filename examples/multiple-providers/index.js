@@ -122,7 +122,7 @@ const cards = [
   }
 ];
 
-function App() {
+export const App = () => {
   return (
     <Menu.Provider disabled={true}>
       <Menu.Provider.Scoped placement="left">
@@ -146,5 +146,5 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+// const rootElement = document.getElementById("root");
+// ReactDOM.render(<App />, rootElement);

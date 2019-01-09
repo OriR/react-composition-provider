@@ -141,7 +141,7 @@ const cards = [
   }
 ];
 
-function App() {
+export const App = () => {
   return (
     <Menu.Provider
       {...{
@@ -164,5 +164,5 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+// const rootElement = document.getElementById("root");
+// ReactDOM.render(<App />, rootElement);
