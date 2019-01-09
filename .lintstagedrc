@@ -1,0 +1,7 @@
+{
+  "linters": {
+    "*.js": ["./node_modules/.bin/prettier --write", "node_modules/.bin/eslint -c .eslintrc --fix", "git add"],
+      "*.{md,json}": ["./node_modules/.bin/prettier --write", "git add"]
+  },
+  "ignore": ["**/es/**/*", "**/dist/**/*"]
+}

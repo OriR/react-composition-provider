@@ -9,10 +9,7 @@ export const defaultCompose = {
   children: composers.node()
 };
 
-const composeChain = (
-  chain,
-  { compose, ignore, polyfills: { assign = Object.assign } = {} }
-) => {
+const composeChain = (chain, { compose, ignore }) => {
   const composeObject = { ...defaultCompose, ...compose };
   const filteredChain = [chain[0]].concat(
     chain.slice(1).map(props => {
@@ -26,7 +23,7 @@ const composeChain = (
   );
 
   return {
-    ...assign({}, ...filteredChain),
+    ...filteredChain.reduce((result, props) => ({ ...result, ...props }), {}),
     ...Object.keys(composeObject).reduce((seed, prop) => {
       const chainWithProp = filteredChain.filter(props => prop in props);
       if (chainWithProp.length > 1) {
