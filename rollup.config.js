@@ -9,7 +9,6 @@ import pkg from './package.json'
 const env = process.env.NODE_ENV
 const isProduction = env === 'production';
 const basicConfig = {
-  input: 'src/index.js',
   external: Object.keys(pkg.peerDependencies || {}),
   output: {
     globals: {
@@ -44,8 +43,9 @@ const basicConfig = {
 
 const config = [{
   ...basicConfig,
-  manualChunks: {
-    composers: ['src/composers.js']
+  input: {
+    'index': 'src/index.js',
+    'composers': 'src/composers.js'
   },
   output: {
     ...basicConfig.output,
@@ -54,6 +54,7 @@ const config = [{
   }
 }, {
   ...basicConfig,
+  input: 'src/index.js',
   output: {
     ...basicConfig.output,
     format: 'umd',
