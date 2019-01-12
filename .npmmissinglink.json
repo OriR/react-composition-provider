@@ -1,0 +1,12 @@
+{
+  "watch": {
+    "executeOnLink": true,
+    "script": "npm run build:production -- --watch"
+  },
+  "customDirectories": [
+    {
+      "path": "es",
+      "build": "npm run build:production"
+    }
+  ]
+}

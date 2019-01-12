@@ -23,13 +23,7 @@
   ],
   "main": "dist/index.js",
   "module": "es/index.js",
-  "dependencies": {
-    "react": "next",
-    "react-dom": "next",
-    "react-overlays": "1.0.0",
-    "react-scripts-rewired": "2.1.3",
-    "uncontrollable": "6.0.0"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
@@ -48,13 +42,15 @@
     "eslint-plugin-react": "^7.12.3",
     "gh-pages": "^2.0.1",
     "lint-staged": "^8.1.0",
+    "npm-missing-link": "0.0.2",
     "prettier": "^1.15.3",
-    "react": "next",
-    "react-dom": "next",
+    "react": "16.8.0-alpha.0",
+    "react-dom": "16.8.0-alpha.0",
     "react-overlays": "^1.0.0",
     "react-scripts-rewired": "^2.1.3",
     "rollup": "^1.1.0",
     "rollup-plugin-babel": "^4.2.0",
+    "rollup-plugin-clear": "^2.0.7",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-replace": "^2.1.0",
@@ -70,7 +66,10 @@
     "deploy": "gh-pages -d build",
     "prepublishOnly": "npm run buid:production",
     "build:site": "react-scripts build",
-    "build:production": "cross-env NODE_ENV=production rollup -c"
+    "build:production": "cross-env NODE_ENV=production rollup -c",
+    "build:development": "cross-env NODE_ENV=development rollup -c",
+    "link": "node_modules/.bin/npm-missing-link",
+    "unlink": "node_modules/.bin/npm-missing-unlink"
   },
   "browserslist": [
     ">0.2%",

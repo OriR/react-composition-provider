@@ -2,9 +2,7 @@
 
 `react-composition-provider` is a small react library that helps you implement a Composition Provider pattern.
 
-The point of the Composition Provider pattern is to make prop drilling more ergonomic.
-[![npm version](https://img.shields.io/npm/v/react-composition-provider.svg?style=flat-square)](https://www.npmjs.com/package/react-composition-provider)
-[![npm downloads](https://img.shields.io/npm/dm/react-composition-provider.svg?style=flat-square)](https://www.npmjs.com/package/react-composition-provider)
+The Composition Provider pattern tries to make prop drilling more ergonomic.
 
 ## Install
 
@@ -14,22 +12,11 @@ npm i --save react-composition-provider
 
 ## Usage
 
-Let's you have a `Menu`, `Card` & `CardList` components. </br>
+Let's look at a simple example of `Menu`, `Card`, `CardList`, `NewsList` & `WeatherList` components. </br>
 Where `CardList` contains `Card` and `Card` contains `Menu`. </br>
-And you have multiple views of different types of cards, for each card you want to show different items in the menu, let's call them `NewsList`, `WeatherList`. </br>
-If you're using `redux` you may want to put these items in the store, that's an option - but then you'd have to manage actions to change the items and dispatch them and a reducer to update them, etc. </br>
-All you want to do is for `NewsList` to have 2 items in the menu, one for removing the article and one for staring it. </br>
-And for `WeatherList` you want to have only 1 item in the menu, for marking the location as irrelevant.
-Doing this kind of thing with `redux` is a bit of an overkill. </br>
+Where `NewsList` & `WeatherList` both contain `CardList`. </br>
 
-You probably want something simpler just to add the correct items of the menu from different locations.</br>
-At which point you'll probably pass down one of these as props down the component tree - `menuItems` or `menuProps`.</br>
-This means that `Card` & `CardList` must know about `menuItems` or `menuProps` and pass them down specifically.</br>
-Besides, `CardList` probably doesn't know about a component called `Menu`, it's only getting this prop because `Card` uses it.
-
-That's where `react-composition-provider` comes in.
-
-That `Menu` & `Card` with `react-composition-provider` would look like this
+We want to pass props from `NewsList`  & `WeatherList` to `Menu`, this is how you do it:
 
 ```js
 // Menu.js
@@ -92,7 +79,7 @@ This is the basic usage but the library gives you a lot more features than just 
 6. Allows you to conditionally mount the component. Even if the `Menu` was rendered somewhere, it doesn't mean that `InnerMenu` has to be mounted.
 7. Gives you a way to control which props can be propagated from a `Menu.Provider` and which aren't.
 
-Most of these can be configured through a second options argument to `withCompositionProvider`, let's have a look at it now.
+Most of these can be configured through a second options argument to `withCompositionProvider`:
 
 ```js
 import { withCompositionProvider, composers } from 'react-composition-provider';
@@ -140,12 +127,25 @@ export default withCompositionProvider(MyComponent, {
   //  11. composers.number.max()                                     - gets the maximum number of the array of numbers
   //  12. composers.number.average()                                 - gets the average of the array of numbers.
   //  13. composers.date.min()                                       - gets the minimum date of the array of dates.
-  //  13. composers.date.max()                                       - gets the maximum date of the array of dates.
+  //  14. composers.date.max()                                       - gets the maximum date of the array of dates.
   compose: {},
 });
 ```
 
-As you can see this package is very flexible, but tries to make sane defaults.
+As you can see this API is very flexible, but tries to have sane defaults.
+
+## Why?
+Prop drilling makes our components too specific, and tie the API of a component with the components it's composing (its implementation). </br>
+When these components change it will probably mean that the API will change too.
+This applies to all the levels you "drill" the props, if something way down the line changes - all of them change. </br>
+What happens when you forget to drill some props? that's a tedious job of going through all the levels between where you have the prop value all the way down to the where it actually needs to be. </br>
+
+You might say that you can solve all of that with a state management library like `redux` - that's true. </br>
+You'd then need to define reducers, actions, and connect components to a store - just to pass some props down the line. It's like using a hammer for screws. </br>
+
+That's why `react-composition-provider` exists.</br>
+It creates a "portal" between the component itself and all the places you defined props for it.</br>
+It's very small (6kb non-gzipped) so you won't feel it, plus it'll probably help you save some boilerplate code so you code end up with a smaller bundle!.</br>
 
 ## Use cases
 
